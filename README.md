@@ -2,8 +2,7 @@
 
 A **60-day, project-first** journey from LLM basics to production prompt-driven agents (Email Agent, LinkedIn Agent, RAG, memory, deployment).
 
-> **Repo name:** `ai-agents-self-learning-and-progress`  
-> Each day is a **separate Git submodule** with its own repository, so daily work stays isolated and the parent repo only tracks progress + pointers.
+> **One repository.** All daily projects live as folders in this repo — no submodules, no separate GitHub repos per day.
 
 ---
 
@@ -45,8 +44,8 @@ OpenAI API → Tool Calling → Build Tools → Agent Loops
 
 ## Progress tracker
 
-| Day | Submodule folder | Topic | Status |
-|-----|------------------|-------|--------|
+| Day | Folder | Topic | Status |
+|-----|--------|-------|--------|
 | 1 | [ai-day1](./ai-day1) | Ollama chat, conversation memory | Done |
 | 2 | [ai-day2-structured-output](./ai-day2-structured-output) | Structured JSON / resume parser | Done |
 | 3 | [ai-day3-prompt-engineering](./ai-day3-prompt-engineering) | Role prompts, constraints, email writer | Done |
@@ -63,32 +62,27 @@ OpenAI API → Tool Calling → Build Tools → Agent Loops
 ## Repository layout
 
 ```text
-ai-agents-self-learning-and-progress/   ← this repo (parent)
-├── README.md                           ← journey overview (you are here)
-├── GITHUB_SETUP.md                     ← clone, submodule, publish steps
-├── scripts/
-│   ├── submodules.env                  ← folder ↔ GitHub repo mapping
-│   ├── init-local-repos.sh             ← init parent + all submodules locally
-│   └── publish-to-github.sh            ← create GitHub repos and push (needs gh)
-├── ai-day1/                            ← submodule
+ai-agents-self-learning-and-progress/
+├── README.md                 ← journey overview (you are here)
+├── GITHUB_SETUP.md           ← clone and push instructions
+├── ai-day1/                  ← Day 1 project code
 ├── ai-day2-structured-output/
 ├── …
 └── day-11,12-email-agent/
 ```
 
+Each folder has its own `README.md` with run instructions for that day.
+
 ---
 
-## Quick start (clone with submodules)
+## Quick start
 
 ```bash
-git clone --recurse-submodules https://github.com/YOUR_GITHUB_USERNAME/ai-agents-self-learning-and-progress.git
+git clone https://github.com/Nishanth-123/ai-agents-self-learning-and-progress.git
 cd ai-agents-self-learning-and-progress
-git submodule update --init --recursive
 ```
 
-Pick a day, open its README, and follow run instructions there.
-
-**Example — Day 1:**
+Pick a day folder and follow its README. **Example — Day 1:**
 
 ```bash
 cd ai-day1
@@ -100,15 +94,16 @@ python3 app.py
 
 ---
 
-## Working on a day (typical flow)
+## Git workflow (single repo)
 
-1. `cd <submodule-folder>`
-2. Make changes, commit **inside that submodule** (its own git repo).
-3. Push the submodule repo to GitHub.
-4. Back at parent root: `git add <submodule-folder>` and commit the updated submodule pointer.
-5. Push the parent repo.
+```bash
+# edit code in any day folder
+git add .
+git commit -m "Day 5: improve agent loop"
+git push origin main
+```
 
-See [GITHUB_SETUP.md](./GITHUB_SETUP.md) for first-time publish and `gh` automation.
+No submodule pointers to update — everything is in one commit history.
 
 ---
 
@@ -117,7 +112,7 @@ See [GITHUB_SETUP.md](./GITHUB_SETUP.md) for first-time publish and `gh` automat
 - Python 3.9+
 - [Ollama](https://ollama.com/) with `llama3.2` for local LLM days
 - Node.js 18+ for Day 7 (React)
-- Google Cloud project for Days 8–10 (Gmail / Sheets) — credentials stay local, never committed
+- Google Cloud project for Days 8–10 — credentials stay local, never committed
 
 ---
 

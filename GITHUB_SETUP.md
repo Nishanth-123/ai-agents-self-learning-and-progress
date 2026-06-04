@@ -1,145 +1,64 @@
-# GitHub setup — parent repo + submodules
+# GitHub setup — single monorepo
 
-This workspace is designed as **one parent repository** and **one GitHub repo per day** (git submodules).
+All day projects live **inside** this repository as folders. There is only **one** GitHub repo:
 
-**Suggested parent name:** `ai-agents-self-learning-and-progress`
-
----
-
-## 1. First-time local setup (on your machine)
-
-From the `ai` folder root:
-
-```bash
-chmod +x scripts/*.sh
-./scripts/init-local-repos.sh
-```
-
-This will:
-
-- Remove the old parent `.git` setup
-- Remove per-day `sync.sh` scripts (replaced by this workflow)
-- Initialize each day folder as its own git repo (with `.gitignore` / README)
-- Register each folder as a **submodule** in the parent (local `file://` URLs until you publish)
+**https://github.com/Nishanth-123/ai-agents-self-learning-and-progress**
 
 ---
 
-## 2. Publish to GitHub (automated)
-
-1. Install and log in to GitHub CLI:
+## Clone
 
 ```bash
-brew install gh   # if needed
-gh auth login
+git clone https://github.com/Nishanth-123/ai-agents-self-learning-and-progress.git
+cd ai-agents-self-learning-and-progress
 ```
 
-2. Set your username and run the publisher:
-
-```bash
-export GITHUB_USER=your-github-username
-./scripts/publish-to-github.sh
-```
-
-The script will:
-
-- Create each **day repo** under `github.com/$GITHUB_USER/<repo-slug>`
-- Push submodule code
-- Create the **parent** repo `ai-agents-self-learning-and-progress`
-- Rewrite `.gitmodules` from `file://` to `https://github.com/...`
-- Push the parent
+No `git submodule` commands needed.
 
 ---
 
-## 3. Publish manually (if you prefer the UI)
-
-For **each** row in `scripts/submodules.env`:
-
-1. Create an empty repo on GitHub (e.g. `day01-ollama-chatbot`).
-2. Inside the local folder:
+## Push changes
 
 ```bash
-cd ai-day1
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/day01-ollama-chatbot.git
-git push -u origin main
-```
-
-3. After all day repos exist, at parent root:
-
-```bash
-# If parent not initialized yet:
-./scripts/init-local-repos.sh
-
-# Replace file:// URLs in .gitmodules with https://github.com/... URLs, then:
-git add .gitmodules
-git commit -m "Point submodules to GitHub remotes"
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/ai-agents-self-learning-and-progress.git
-git push -u origin main
-```
-
----
-
-## 4. Clone later (another machine)
-
-```bash
-git clone --recurse-submodules https://github.com/YOUR_GITHUB_USERNAME/ai-agents-self-learning-and-progress.git
-```
-
-If you already cloned without submodules:
-
-```bash
-git submodule update --init --recursive
-```
-
----
-
-## 5. Day-to-day git workflow
-
-**Inside a day project:**
-
-```bash
-cd day5-agent-loop
-git checkout -b feature/my-change
-# edit, test
+cd /path/to/ai-agents-self-learning-and-progress
 git add .
-git commit -m "Describe change"
-git push origin main
-```
-
-**Update parent pointer:**
-
-```bash
-cd ../..
-git add day5-agent-loop
-git commit -m "Update day5 submodule: describe change"
+git commit -m "Describe your change"
 git push origin main
 ```
 
 ---
 
-## 6. Secrets (important)
+## First-time setup (new machine)
 
-Never commit:
+```bash
+gh auth login   # optional, for gh CLI
+git clone https://github.com/Nishanth-123/ai-agents-self-learning-and-progress.git
+```
 
-- `credentials.json`, `token.pickle`, `credentials/` folders
+Per-day setup (venv, npm, Ollama, Google credentials) is documented in each folder’s `README.md`.
+
+---
+
+## Secrets (never commit)
+
+- `credentials.json`, `token.pickle`, `credentials/` directories
 - `.env` files with API keys
 
-Each submodule `.gitignore` excludes these. Use local copies only.
+These are listed in the root `.gitignore`.
 
 ---
 
-## Submodule ↔ GitHub repo map
+## Project folders
 
-| Folder | GitHub repo slug |
-|--------|------------------|
-| `ai-day1` | `day01-ollama-chatbot` |
-| `ai-day2-structured-output` | `day02-structured-output` |
-| `ai-day3-prompt-engineering` | `day03-prompt-engineering-email-writer` |
-| `ai-day4-tools-with-ai` | `day04-tool-calling` |
-| `day5-agent-loop` | `day05-agent-loop` |
-| `day6-fastapi-agent` | `day06-fastapi-ollama-backend` |
-| `day7-ai-assistant-ui` | `day07-react-chat-ui` |
-| `day8,9-gmail-agent-learning` | `day08-09-gmail-api` |
-| `day10-sheets-agent-learning` | `day10-google-sheets-api` |
-| `day-11,12-email-agent` | `day11-12-email-agent` |
-
-Edit `scripts/submodules.env` if you rename repos.
+| Day | Folder |
+|-----|--------|
+| 1 | `ai-day1` |
+| 2 | `ai-day2-structured-output` |
+| 3 | `ai-day3-prompt-engineering` |
+| 4 | `ai-day4-tools-with-ai` |
+| 5 | `day5-agent-loop` |
+| 6 | `day6-fastapi-agent` |
+| 7 | `day7-ai-assistant-ui` |
+| 8–9 | `day8,9-gmail-agent-learning` |
+| 10 | `day10-sheets-agent-learning` |
+| 11–12 | `day-11,12-email-agent` |
