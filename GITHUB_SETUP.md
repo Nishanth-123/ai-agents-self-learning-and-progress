@@ -39,6 +39,19 @@ Per-day setup (venv, npm, Ollama, Google credentials) is documented in each fold
 
 ---
 
+## Remove old per-day GitHub repos (one-time)
+
+If you previously published separate repos per day, delete them after the monorepo is live:
+
+```bash
+gh auth refresh -h github.com -s delete_repo
+bash scripts/delete-old-day-repos.sh
+```
+
+Keeps only `ai-agents-self-learning-and-progress`.
+
+---
+
 ## Secrets (never commit)
 
 - `credentials.json`, `token.pickle`, `credentials/` directories
