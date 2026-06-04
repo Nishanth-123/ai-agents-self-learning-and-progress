@@ -1,0 +1,26 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python (root-level only; each submodule has its own)
+__pycache__/
+*.py[cod]
+.Python
+.env
+.env.*
+
+# Local secrets (never commit)
+**/credentials.json
+**/token.pickle
+**/credentials/
+*.pem
+
+# Env / deps (submodules ignore these too)
+**/venv/
+**/.venv/
+**/node_modules/
+**/dist/
+**/.pytest_cache/
