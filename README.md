@@ -1,198 +1,241 @@
 # AI Agents — Self Learning & Progress
 
-A **60-day, project-first** journey from LLM fundamentals to production-grade AI agents, covering tool calling, workflows, RAG, memory, deployment, and multi-agent systems.
+A **60-day, project-first journey** into building production-grade AI agents, covering tool calling, workflows, RAG, memory, deployment, and multi-agent systems.
 
-> **One repository.** All daily projects live inside this repo as folders — no submodules, no separate repositories.
+The focus is **not** on training models or AI research. Instead, it is on **engineering reliable AI systems** that combine LLMs with APIs, tools, workflows, memory, retrieval, and automation.
+
+> **One repository.** Every day's work lives inside this repository as an individual folder with its own implementation and notes.
 
 ---
 
-## Mental Model
+# Engineering Mental Model
 
 ```text
 LLM = Brain
 Tools = Hands
-Agent = LLM controlling tools
+Agent = LLM + Tools + Control Loop
+Workflow = Multiple Tool Calls + State + Logic
 ```
 
 ```text
-Prompt
-   ↓
-LLM reasons
-   ↓
-Chooses tools
-   ↓
-Executes tools
-   ↓
-Observes results
-   ↓
-Repeats until done
+          User Prompt
+                │
+                ▼
+        ┌─────────────────┐
+        │       LLM       │
+        │   (Reasoning)   │
+        └─────────────────┘
+                │
+      Decides which tool to call
+                │
+                ▼
+        ┌─────────────────┐
+        │     Tools       │
+        │ Gmail, Sheets   │
+        │ APIs, Search    │
+        └─────────────────┘
+                │
+        Returns structured data
+                │
+                ▼
+        ┌─────────────────┐
+        │       LLM       │
+        │  Interprets     │
+        │  & Synthesizes  │
+        └─────────────────┘
+                │
+                ▼
+          Final User Output
 ```
 
 ---
 
-## What I Am Building Toward
+# What I'm Building Toward
 
-| Agent                 | Examples                                                                            |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| **Email Agent**       | Personalized outreach, recruiter replies, inbox summarization, follow-up automation |
-| **LinkedIn Agent**    | Job search, recruiter discovery, profile analysis, outreach generation              |
-| **RAG Agent**         | Chat over documents, knowledge retrieval, company-specific assistants               |
-| **Production Agents** | Scheduled jobs, memory, observability, deployment, multi-agent workflows            |
-
-**Not the goal:** ML research, model training, fine-tuning, or deep learning theory.
-
-**The goal:** Practical AI Systems Engineering — building reliable agents that combine LLMs, tools, APIs, workflows, memory, and automation.
+| Agent                  | Capabilities                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| **Email Agent**        | Personalized outreach, recruiter communication, inbox summarization, follow-up automation |
+| **LinkedIn Agent**     | Recruiter discovery, profile analysis, job search automation                              |
+| **Job Search Agent**   | Find openings, filter opportunities, generate tailored applications                       |
+| **RAG Agent**          | Chat with documents and company-specific knowledge bases                                  |
+| **Productivity Agent** | Calendar, Sheets, reminders, workflow automation                                          |
+| **Production Agents**  | Memory, scheduling, observability, deployment, multi-agent orchestration                  |
 
 ---
 
-## Learning Order
+# Learning Philosophy
+
+Rather than relying on frameworks from day one, this roadmap builds everything from first principles:
 
 ```text
-Ollama / LLM Fundamentals
-        ↓
+Local LLMs
+      ↓
 Structured Outputs
-        ↓
+      ↓
 Prompt Engineering
-        ↓
+      ↓
 Tool Calling
-        ↓
+      ↓
 Agent Loops
-        ↓
-FastAPI Agents
-        ↓
-Agent UI
-        ↓
-Gmail Integration
-        ↓
-Google Sheets Integration
-        ↓
-End-to-End Email Agent
-        ↓
-LinkedIn Agent
-        ↓
-RAG
-        ↓
+      ↓
+API Integrations
+      ↓
+Workflow Automation
+      ↓
+Real AI Agents
+      ↓
 Memory
-        ↓
+      ↓
+RAG
+      ↓
 Production Systems
-        ↓
+      ↓
 LangGraph / CrewAI
-        ↓
-Multi-Agent Systems
+      ↓
+Multi-Agent Architectures
 ```
 
 ---
 
-## Progress Tracker
+# Progress Tracker
 
-| Day   | Folder                                                       | Topic                                                         | Status |
-| ----- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------ |
-| 1     | [ai-day1](./ai-day1)                                         | Ollama chat, conversation memory                              | ✅ Done |
-| 2     | [ai-day2-structured-output](./ai-day2-structured-output)     | Structured JSON, resume parser                                | ✅ Done |
-| 3     | [ai-day3-prompt-engineering](./ai-day3-prompt-engineering)   | Role prompts, constraints, email writer                       | ✅ Done |
-| 4     | [ai-day4-tools-with-ai](./ai-day4-tools-with-ai)             | Tool schemas, weather/time tools                              | ✅ Done |
-| 5     | [day5-agent-loop](./day5-agent-loop)                         | Observe → Think → Act loop                                    | ✅ Done |
-| 6     | [day6-fastapi-agent](./day6-fastapi-agent)                   | FastAPI agent architecture                                    | ✅ Done |
-| 7     | [day7-ai-assistant-ui](./day7-ai-assistant-ui)               | React AI chat UI, conversation history                        | ✅ Done |
-| 8–9   | [day8,9-gmail-agent-learning](./day8,9-gmail-agent-learning) | Gmail API, OAuth, MIME messages                               | ✅ Done |
-| 10    | [day10-sheets-agent-learning](./day10-sheets-agent-learning) | Google Sheets read/write operations                           | ✅ Done |
-| 11–12 | [day-11,12-email-agent](./day-11,12-email-agent)             | End-to-end Email Agent (Sheets → LLM → Gmail → Status Update) | ✅ Done |
-
----
-
-## Completed Milestones
-
-✅ Local LLMs with Ollama
-
-✅ Structured JSON Outputs
-
-✅ Prompt Engineering Fundamentals
-
-✅ Tool Calling & Tool Schemas
-
-✅ Agent Loops
-
-✅ FastAPI Agent Backend
-
-✅ React-Based AI Chat UI
-
-✅ Gmail API Integration
-
-✅ Google Sheets Integration
-
-✅ End-to-End Email Agent
+| Day   | Project                | Concepts                                            | Status |
+| ----- | ---------------------- | --------------------------------------------------- | ------ |
+| 1     | Ollama Fundamentals    | Local LLMs, conversation memory                     | ✅      |
+| 2     | Structured Outputs     | JSON generation, parsing                            | ✅      |
+| 3     | Prompt Engineering     | Roles, constraints, reusable prompts                | ✅      |
+| 4     | Tool Calling           | Tool schemas, deterministic functions               | ✅      |
+| 5     | Agent Loop             | Observe → Think → Act architecture                  | ✅      |
+| 6     | FastAPI Agent          | Backend architecture for AI systems                 | ✅      |
+| 7     | React AI UI            | Chat interface and conversation state               | ✅      |
+| 8–9   | Gmail Integration      | OAuth, Gmail API, MIME parsing                      | ✅      |
+| 10    | Google Sheets          | Read/write automation                               | ✅      |
+| 11–12 | Email Agent            | Sheets → LLM → Gmail workflow                       | ✅      |
+| 13–14 | Inbox Summarizer Agent | LLM tool calling, Gmail search, inbox summarization | ✅      |
 
 ---
 
-## Key Learnings So Far
+# Completed Projects
 
-### Agent Engineering
+## Email Agent (Day 11–12)
 
-* LLMs generate text, not Python objects.
-* Never trust LLM output blindly.
-* Validate, clean, and parse outputs before executing actions.
-* Agents are orchestration systems connecting tools, APIs, workflows, and AI.
-
-### Context Engineering
-
-* Better context produces better outputs.
-* Context quality often matters more than prompt wording.
-* Explicit facts outperform model assumptions.
-
-### Reliability Engineering
-
-* Build components independently before composing workflows.
-* Verify integrations separately before creating agent pipelines.
-* Reliability is often more important than model intelligence.
-
-### Practical Lessons
-
-* Structured output frequently requires cleanup and validation.
-* Tool integration creates more engineering challenges than LLM calls.
-* Most agent complexity comes from state management, workflows, and external systems.
-
----
-
-## Featured Project
-
-### Email Agent (Day 11–12)
-
-Built an end-to-end Email Agent that:
+Built a complete workflow:
 
 ```text
 Google Sheets
-      ↓
-Read Pending Contacts
-      ↓
-Generate Personalized Email (Ollama)
-      ↓
-Parse Structured Output
-      ↓
-Send via Gmail API
-      ↓
-Update Sheet Status
+        │
+        ▼
+Read pending contacts
+        │
+        ▼
+Generate personalized email (LLM)
+        │
+        ▼
+Validate structured output
+        │
+        ▼
+Send through Gmail API
+        │
+        ▼
+Update spreadsheet status
 ```
 
-**Key Concepts Practiced**
+### Concepts Practiced
 
 * Tool orchestration
 * Structured outputs
-* Gmail API integration
-* Google Sheets integration
-* Agent state management
 * Prompt engineering
 * Context engineering
+* Gmail API integration
+* Google Sheets integration
 * Workflow automation
-* Error handling and output validation
+* Error handling
+* State management
 
 ---
 
-## Repository Layout
+## Inbox Summarizer Agent (Day 13–14)
+
+Built an AI agent capable of summarizing Gmail conversations using **LLM-driven tool calling**.
+
+Architecture:
+
+```text
+User Prompt
+      │
+      ▼
+LLM (Ollama)
+      │
+      ▼
+read_inbox(query, max_results)
+      │
+      ▼
+Gmail API
+      │
+      ▼
+Structured Email Objects
+      │
+      ▼
+LLM Summarization
+      │
+      ▼
+Actionable Summary
+```
+
+### Major Learnings
+
+* The LLM should **reason**, not implement API logic.
+* Tools should perform **deterministic actions**.
+* Simpler tool interfaces produce better tool calls.
+* Returning normalized objects to the LLM is preferable to exposing raw API payloads.
+* Gmail search syntax (`is:unread`, `from:...`, `label:...`) maps naturally to agent tool design.
+* Tool outputs should be validated before further processing.
+
+---
+
+# Key Engineering Learnings
+
+## Agent Engineering
+
+* LLMs generate text, not executable business logic.
+* Tool execution should remain deterministic.
+* Keep reasoning inside the LLM and execution inside tools.
+* Design tools with simple, stable interfaces.
+
+---
+
+## Context Engineering
+
+* Better context consistently outperforms better prompting.
+* Structured inputs improve reasoning quality.
+* Explicit facts are preferable to implicit assumptions.
+
+---
+
+## Reliability Engineering
+
+* Never blindly trust model outputs.
+* Validate structured responses before execution.
+* Build and verify components independently before orchestration.
+* Normalize external API responses before exposing them to the LLM.
+
+---
+
+## Tool Design Lessons
+
+* Simpler tool signatures improve model performance.
+* Prefer one expressive parameter (e.g., Gmail query syntax) over multiple tightly coupled arguments.
+* Tools should return normalized data rather than provider-specific payloads.
+* The LLM decides **when** and **how** to use tools; the tool performs the action.
+
+---
+
+# Repository Structure
 
 ```text
 ai-agents-self-learning-and-progress/
+│
 ├── README.md
-├── GITHUB_SETUP.md
 ├── ai-day1/
 ├── ai-day2-structured-output/
 ├── ai-day3-prompt-engineering/
@@ -200,90 +243,71 @@ ai-agents-self-learning-and-progress/
 ├── day5-agent-loop/
 ├── day6-fastapi-agent/
 ├── day7-ai-assistant-ui/
-├── day8,9-gmail-agent-learning/
+├── day8-9-gmail-agent-learning/
 ├── day10-sheets-agent-learning/
-└── day-11,12-email-agent/
+├── day11-12-email-agent/
+└── day13-14-inbox-summarizer/
 ```
 
-Each project folder contains its own README with setup instructions and implementation notes.
+Each project is self-contained and documents its own setup, implementation, and learnings.
 
 ---
 
-## Quick Start
+# Tech Stack
 
-```bash
-git clone https://github.com/Nishanth-123/ai-agents-self-learning-and-progress.git
-
-cd ai-agents-self-learning-and-progress
-```
-
-Choose a day folder and follow its README.
-
-Example:
-
-```bash
-cd ai-day1
-
-pip install ollama
-
-ollama serve
-
-ollama pull llama3.2
-
-python3 app.py
-```
+* Python
+* Ollama
+* Local LLMs (Llama / Qwen family)
+* FastAPI
+* React
+* Gmail API
+* Google Sheets API
+* JSON Schema
+* REST APIs
 
 ---
 
-## Git Workflow
+# Current Focus
 
-```bash
-git add .
+Building practical AI systems capable of:
 
-git commit -m "Day 12: Complete Email Agent"
-
-git push origin main
-```
-
-Everything lives in a single repository and a single commit history.
-
----
-
-## Prerequisites
-
-* Python 3.9+
-* Ollama with a local model (Llama 3.2 or equivalent)
-* Node.js 18+ (React projects)
-* Google Cloud Project (Gmail & Sheets integrations)
-* Gmail API credentials (kept local, never committed)
+* Tool calling
+* Workflow automation
+* API orchestration
+* Email intelligence
+* Retrieval
+* Memory
+* Multi-step reasoning
+* Multi-agent collaboration
 
 ---
 
-## Remaining Roadmap Highlights
+# Upcoming Roadmap
 
-### Agents
+## Intelligent Agents
 
 * LinkedIn Job Search Agent
 * Recruiter Outreach Agent
-* Follow-up Automation Agent
+* Automated Follow-up Agent
+* Calendar & Productivity Agent
 
-### Knowledge Systems
+## Knowledge Systems
 
 * Embeddings
 * Vector Databases
 * Retrieval-Augmented Generation (RAG)
 
-### Production Engineering
+## Production Engineering
 
 * PostgreSQL
 * Redis
-* Async Workers
+* Background Workers
 * Scheduling
 * Docker
-* Observability
 * Monitoring
+* Observability
 
-### Advanced Agent Frameworks
+## Advanced Orchestration
 
 * LangGraph
 * CrewAI
@@ -291,6 +315,24 @@ Everything lives in a single repository and a single commit history.
 
 ---
 
-## License
+# Philosophy
 
-MIT — Learning, experimentation, and portfolio use.
+The objective of this repository is to understand **how modern AI agents are engineered in production**, by incrementally building every layer:
+
+* Local LLMs
+* Tool calling
+* Agent loops
+* External integrations
+* Workflows
+* Memory
+* Retrieval
+* Production deployment
+* Multi-agent orchestration
+
+The emphasis is on **engineering robust, maintainable AI systems**, leveraging prior experience in designing scalable software rather than treating LLMs as standalone components.
+
+---
+
+# License
+
+MIT — Open for learning, experimentation, and portfolio use.
