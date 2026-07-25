@@ -112,7 +112,7 @@ Multi-Agent Architectures
 | 10    | Google Sheets          | Read/write automation                               | ✅      |
 | 11–12 | Email Agent            | Sheets → LLM → Gmail workflow                       | ✅      |
 | 13–14 | Inbox Summarizer Agent | LLM tool calling, Gmail search, inbox summarization | ✅      |
-
+| 15–16 | Follow-Up Agent        | Gmail threads, context engineering, workflow automation, drafts  | ✅      |
 ---
 
 # Completed Projects
@@ -193,6 +193,46 @@ Actionable Summary
 
 ---
 
+## Follow-Up Agent (Day 15–16)
+
+Built an AI agent that identifies recruiter conversations requiring follow-up, generates personalised follow-up emails using a local LLM, and creates Gmail drafts for human review.
+
+Architecture:
+
+```text
+Sent Mail
+      │
+      ▼
+Fetch Gmail Threads
+      │
+      ▼
+Normalize → SentEmail Model
+      │
+      ▼
+Filter Unreplied Conversations (>7 days)
+      │
+      ▼
+Llama 3.2 (Ollama)
+      │
+      ▼
+Generate Structured Follow-Up
+      │
+      ▼
+Create Gmail Draft
+```
+
+### Concepts Practiced
+
+* Gmail thread parsing
+* OAuth token refresh handling
+* Domain modelling (`SentEmail`)
+* Context engineering using full email threads
+* Structured JSON generation
+* Gmail Draft API
+* Workflow orchestration
+* Separation of reasoning and business logic
+* Human-in-the-loop AI workflows
+
 # Key Engineering Learnings
 
 ## Agent Engineering
@@ -218,6 +258,7 @@ Actionable Summary
 * Validate structured responses before execution.
 * Build and verify components independently before orchestration.
 * Normalize external API responses before exposing them to the LLM.
+* Design domain models to isolate business logic from external APIs.
 
 ---
 
@@ -247,6 +288,7 @@ ai-agents-self-learning-and-progress/
 ├── day10-sheets-agent-learning/
 ├── day11-12-email-agent/
 └── day13-14-inbox-summarizer/
+├── day15-16-followup-agent/
 ```
 
 Each project is self-contained and documents its own setup, implementation, and learnings.
@@ -264,6 +306,9 @@ Each project is self-contained and documents its own setup, implementation, and 
 * Google Sheets API
 * JSON Schema
 * REST APIs
+* Gmail Draft API
+* OAuth 2.0
+* MIME Email Processing
 
 ---
 
@@ -272,13 +317,12 @@ Each project is self-contained and documents its own setup, implementation, and 
 Building practical AI systems capable of:
 
 * Tool calling
-* Workflow automation
-* API orchestration
-* Email intelligence
-* Retrieval
-* Memory
-* Multi-step reasoning
+* Workflow orchestration
+* Agent memory
+* Retrieval (RAG)
+* Long-running agents
 * Multi-agent collaboration
+* Production deployment
 
 ---
 
